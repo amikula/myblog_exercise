@@ -1,0 +1,333 @@
+title: Introduction to Rails
+gradient: top-bottom blue black
+
+<% content_for :css do %>
+  .step { display: none; }
+  .stepcurrent .code { color: white; }
+<% end %>
+
+
+h1. Introduction to Rails
+
+Alf Mikula, AT&amp;T Interactive:
+* Twitter: @alfmikula
+* Email: amikula@gmail.com
+
+Reid MacDonald, AT&amp;T Interactive:
+* Twitter: @reidmix
+
+<br/>
+<br/>
+<br/>
+<br/>
+Prerequisites: Ruby 1.8.6 or 1.8.7, rails 2.3.5, sqlite3-ruby
+
+
+h1. Starting a Rails Project
+
+rails &lt;projectname&gt;
+
+div(step). {{{
+% rails myblog
+      create
+      create  app/controllers
+      create  app/helpers
+      create  app/models
+      create  app/views/layouts
+      create  config/environments
+      create  config/initializers
+      create  config/locales
+      create  db
+      create  doc
+      create  lib
+      create  lib/tasks
+      create  log
+      create  public/images
+      create  public/javascripts
+      create  public/stylesheets
+      create  script/performance
+      create  test/fixtures
+      create  test/functional
+      create  test/integration
+      create  test/performance
+      create  test/unit
+      create  vendor
+      create  vendor/plugins
+      create  tmp/sessions
+      create  tmp/sockets
+      create  tmp/cache
+      create  tmp/pids
+      create  Rakefile
+      create  README
+      create  app/controllers/application_controller.rb
+      create  app/helpers/application_helper.rb
+      create  config/database.yml
+      create  config/routes.rb
+      create  config/locales/en.yml
+      create  db/seeds.rb
+      create  config/initializers/backtrace_silencers.rb
+      create  config/initializers/inflections.rb
+      create  config/initializers/mime_types.rb
+      create  config/initializers/new_rails_defaults.rb
+      create  config/initializers/session_store.rb
+      create  config/environment.rb
+      create  config/boot.rb
+      create  config/environments/production.rb
+      create  config/environments/development.rb
+      create  config/environments/test.rb
+      create  script/about
+      create  script/console
+      create  script/dbconsole
+      create  script/destroy
+      create  script/generate
+      create  script/runner
+      create  script/server
+      create  script/plugin
+      create  script/performance/benchmarker
+      create  script/performance/profiler
+      create  test/test_helper.rb
+      create  test/performance/browsing_test.rb
+      create  public/404.html
+      create  public/422.html
+      create  public/500.html
+      create  public/index.html
+      create  public/favicon.ico
+      create  public/robots.txt
+      create  public/images/rails.png
+      create  public/javascripts/prototype.js
+      create  public/javascripts/effects.js
+      create  public/javascripts/dragdrop.js
+      create  public/javascripts/controls.js
+      create  public/javascripts/application.js
+      create  doc/README_FOR_APP
+      create  log/server.log
+      create  log/production.log
+      create  log/development.log
+      create  log/test.log
+}}}
+
+
+h1. Built in Web Server
+
+script/server <span class='step'>-p &lt;portnum&gt;</span>
+*(step) webrick
+*(step) mongrel
+
+
+h1. MVC Architecture
+
+*(step) Model
+*(step) View
+*(step) Controller
+
+
+h1. Rails Directory Structure
+
+*(step) app/
+*(step) config/
+*(step) lib/
+*(step) public/
+*(step) script/
+*(step) test/
+*(step) vendor/
+
+
+h1. Generators in Rails
+
+{{{
+script/generate
+}}}
+
+*(step) controller
+*(step) helper
+*(step) plugin
+*(step) model
+*(step) migration
+*(step) rspec
+
+
+h1. Scaffolding
+
+{{{
+script/generate scaffold <model> attrname:type ...
+}}}
+
+
+h1. Generating Our First Scaffold
+
+div(step). {{{
+script/generate scaffold Post title:string body:text
+}}}
+
+
+h1. Database Migrations
+
+* Updating code
+* Deploying code
+* Rolling back code (db:rollback)
+* Migration files
+
+
+h1. Run your migrations
+
+* rake db:migrate
+
+
+h1. Interacting With the Scaffold
+
+* DEMO: View and create post
+
+
+h1. Working With Views
+
+*(step) ERB: &lt;% code %%&gt; &lt;%%= code %&gt;
+*(step) We want a different format in listing:
+*(step) Reverse the order of the posts
+*(step) Display creation date.strftime('%A, %b %d, %Y %I:%M%p')
+*(step) rake time:zones:local; config.time_zone=
+
+
+h1. Partials
+
+{{{
+render @post
+}}}
+
+* Renders app/views/posts/_post.html.erb
+* Sets local variable 'post'
+
+
+h1. Why Partials?
+*(step) Use partials to share HTML between views
+*(step) Reduce the size of your views
+*(step) Easy to render collections
+*(step) Exercise: Extract post display into partial
+
+
+h1. Layouts
+
+* Controller layout
+* Application layout
+
+
+h1. Helpers
+
+* Helpers can be used to generate code for views
+* Methods included automatically for each controller
+* Exercise: Use a helper to preserve line breaks in post text
+
+
+h1. Routes
+
+* config/routes.rb
+* Mapping from url to controller/action
+* Set your root route
+
+
+h1. Generating Models
+
+{{{
+script/generate model <modelname> attr:type ...
+}}}
+
+
+h1. Comments
+
+* Each Post can have many Comments
+* Each Comment has an author, and Comment text
+* Each Comment belongs to one Post.
+
+
+h1. Exercise: Generating a Model
+
+* Generate comment model
+* rake db:migrate
+
+
+h1. Relationships
+
+* has_many :comments
+* belongs_to :post
+
+
+h1. script/console
+
+* Connects to database
+* Allows you to explore your application
+
+
+h1. script/console Exercise
+
+* Add comments to your posts from the console
+
+
+h1. Comments in the View
+
+* Display comments in show.html.erb
+
+
+h1. Validations
+
+*(step) validates_presence_of
+*(step) validates_format_of
+*(step) validates_length_of
+*(step) validates_uniqueness_of
+*(step) ...and more!
+
+
+h1. Add validations to Comment
+
+
+h1. Validation Errors
+
+* comment.save
+* comment.save!
+* comment.valid
+* comment.errors
+
+
+h1. Generating a Controller
+
+{{{
+script/generate controller Comments
+}}}
+
+
+h1. Adding Routes for Comments
+
+* map.resources :posts, :has_many => :comments
+
+
+h1. Forms
+
+* form_for
+
+
+h1. Validation Errors
+
+* comment.save
+* comment.save!
+* comment.valid
+* comment.errors
+*(step) error_messages_for :comment
+
+
+h1. Authentication
+
+*(step) acts_as_authenticated
+*(step) restful_authentication
+*(step) authlogic
+*(step) devise
+
+
+h1. Questions?
+
+
+h1. Go build your own Rails Application!
+
+The best way to learn Rails is to build your own applications...
+
+My personal applications:
+* StampCalculator
+* Vote!
+* PromoteGo.org

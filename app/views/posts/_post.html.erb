@@ -1,0 +1,7 @@
+<div class="post">
+  <h2><%= link_to h(post.title), post %></h2>
+  <div><em><%= post.created_at.strftime('%A, %b %d, %Y %I:%M%p') %></em></div>
+  <div>
+  <%= preserve_line_breaks(post.body) %>
+  </div>
+</div>

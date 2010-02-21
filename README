@@ -1,0 +1,18 @@
+== App from Intro to Rails
+
+This is the MyBlog exercise from Alf Mikula's Intro to Rails class.
+
+To get it running you'll need to install Rails 2.3.5 and sqlite3-ruby
+gems:
+
+  gem install rails -v 2.3.5
+  gem install sqlite3-ruby -v '~> 1.2.5'
+  script/server
+
+== Slides
+
+Slides are in doc/slides.s9, and require the "slideshow" gem to build:
+
+  gem install slideshow
+  rake slides
+  open doc/slides/slides.html
